@@ -1,6 +1,7 @@
 package me.neznamy.tab.shared.chat.rgb;
 
 import lombok.Getter;
+import me.neznamy.tab.shared.TAB;
 import me.neznamy.tab.shared.chat.IChatBaseComponent;
 import me.neznamy.tab.shared.chat.rgb.format.BukkitFormat;
 import me.neznamy.tab.shared.chat.rgb.format.HtmlFormat;
@@ -41,7 +42,9 @@ public class RGBUtils {
     public RGBUtils() {
         List<RGBFormatter> list = new ArrayList<>();
         if (ReflectionUtils.classExists("net.kyori.adventure.text.minimessage.MiniMessage")) {
-            list.add(new MiniMessageFormat());
+            try {
+                list.add(new MiniMessageFormat());
+            } catch (NoClassDefFoundError ignored) {}
         }
         list.add(new BukkitFormat());
         list.add(new CMIFormat());
